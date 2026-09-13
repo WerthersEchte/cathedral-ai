@@ -1,0 +1,135 @@
+plugins {
+    id 'java-library'
+    id 'jacoco'
+
+    id 'maven-publish'
+    id 'org.jreleaser' version '1.26.0'
+    id 'signing'
+}
+
+group 'io.github.werthersechte'
+version '2.0.0'
+
+sourceCompatibility = 21
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    mockitoAgent
+}
+
+dependencies {
+    implementation 'io.github.werthersechte:cathedral-game:2.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        csv.required = true
+    }
+}
+
+// maven central deploy
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign publishing.publications
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+
+            from components.java
+
+            pom {
+                name = project.name
+                description = "An ai interface for cathedral in Java"
+                url = "https://github.com/WerthersEchte/cathedral-ai"
+                licenses {
+                    license {
+                        name = "The Unlicense"
+                        url = "https://unlicense.org"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "WerthersEchte"
+                        name = "Eike Petersen"
+                        email = "epetersen@gmx.li"
+                    }
+                }
+                scm {
+                    url = "https://github.com/WerthersEchte/cathedral-ai"
+
+                    connection = "scm:git:git://github.com/WerthersEchte/cathedral-ai.git"
+
+                    developerConnection = "scm:git:git://github.com/WerthersEchte/cathedral-ai.git"
+
+                }
+                issueManagement {
+                    url = "https://github.com/WerthersEchte/cathedral-ai/issues"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
+    }
+}
+
+jreleaser {
+    signing {
+        pgp {
+            active = 'ALWAYS'
+            armored = true
+        }
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'RELEASE'
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
+    }
+    release {
+        github {
+            skipRelease = true
+            github.token = "empty"
+        }
+    }
+}
