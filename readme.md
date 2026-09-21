@@ -4,7 +4,7 @@
 [![javadoc](https://javadoc.io/badge2/io.github.werthersechte/cathedral-ai/javadoc.svg)](https://javadoc.io/doc/io.github.werthersechte/cathedral-ai)
 
 ## About
-This is a Java interface for playing the implementation of the board game cathedral (https://en.wikipedia.org/wiki/Cathedral_(board_game)) with an ai.
+This is a Java/Kotlin interface for creating an ai-agent playing cathedral (https://en.wikipedia.org/wiki/Cathedral_(board_game)).
 
 ## How to get
 Add to use with gradle
@@ -18,11 +18,17 @@ implementation 'io.github.werthersechte:cathedral-ai:2.0.1'
 ```
 
 ## Agent as a Service
-To expose your Agent as a service(https://javadoc.scijava.org/Java21/java.base/java/util/ServiceLoader.html) do the following steps:
+To expose your Agent as a Service(https://javadoc.scijava.org/Java21/java.base/java/util/ServiceLoader.html) do the following steps:
 
 1. Create your Agent as a class that implements the Agent-Interface found in this repository
 ```
+// Kotlin
 package de.hawkiel.cathedral.ai.example
+
+import de.fhkiel.ki.cathedral.ai.Agent
+import de.fhkiel.ki.cathedral.game.Game
+import de.fhkiel.ki.cathedral.game.Placement
+import java.util.Optional
 
 // This agent always passes its turn
 class PassingAgent: Agent{
