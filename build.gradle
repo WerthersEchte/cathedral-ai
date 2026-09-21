@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'io.github.werthersechte'
-version '2.0.0'
+version '2.0.1'
 
 sourceCompatibility = 21
 
@@ -21,7 +21,7 @@ configurations {
 }
 
 dependencies {
-    implementation 'io.github.werthersechte:cathedral-game:2.0.0'
+    api 'io.github.werthersechte:cathedral-game:2.0.0'
 }
 
 test {
