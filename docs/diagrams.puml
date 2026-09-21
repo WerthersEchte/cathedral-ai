@@ -1,0 +1,24 @@
+@startuml
+' Lifecycle of an agent
+
+start
+:instantiate Agent with default-Constructor;
+:invoke name();
+repeat
+    :invoke initialize();
+    repeat
+        :invoke calculateTurn();
+        note left
+          Returns an Optional
+           If the Optional
+           - contains a valid Placement it will be placed
+           - is empty the turn will be passed
+             with no building placed
+        end note
+    repeat while (game finished) is (no) not (yes)
+    :invoke gameFinished();
+repeat while (more games) is (yes) not (no)
+:invoke stop();
+stop
+
+@enduml

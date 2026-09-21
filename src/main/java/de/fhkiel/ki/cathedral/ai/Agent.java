@@ -9,7 +9,7 @@ import java.util.Optional;
  * An interface for AI agents to play cathedral
  *
  * @author Eike Petersen {@literal <eike.petersen@fh-kiel.de>}
- * @version 1.1
+ * @version 1.2
  * @since 1.0
  */
 public interface Agent {
@@ -37,17 +37,9 @@ public interface Agent {
    * @param game        the game
    * @param timeForTurn the time for turn
    * @param timeBonus   the time bonus
-   * @return the possible Placement in an optional, if optional is empty turn will be forfeit
+   * @return the possible Placement in an optional, if optional is empty turn will be passed with no building placed
    */
   Optional<Placement> calculateTurn(Game game, int timeForTurn, int timeBonus);
-
-  /**
-   * Call to evaluate the last turn.
-   *
-   * @param game the game
-   * @return the evaluation
-   */
-  default String evaluateLastTurn(Game game){ return "No evaluation done"; }
 
   /**
    * Called on game end.
