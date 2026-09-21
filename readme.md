@@ -54,7 +54,7 @@ class PassingAgent: Agent{
    ![Service folder](docs/img/service-folder.png)
    
 3. Create a file named `de.fhkiel.ki.cathedral.ai.Agent`in the service folder
-4. Write the **fully qualified class name** into the file, e.g. in ths case `de.hawkiel.cathedral.ai.example.PassingAgent`
+4. Write the **fully qualified class name** into the file, e.g. in this case `de.hawkiel.cathedral.ai.example.PassingAgent`
 5. Now a ServiceLoader can discover your Service in all exported jars
 
 ## Lifecycle
