@@ -4,7 +4,8 @@
 [![javadoc](https://javadoc.io/badge2/io.github.werthersechte/cathedral-ai/javadoc.svg)](https://javadoc.io/doc/io.github.werthersechte/cathedral-ai)
 
 ## About
-This is a Java/Kotlin interface for creating an ai-agent playing cathedral (https://en.wikipedia.org/wiki/Cathedral_(board_game)).
+This is a Java/Kotlin interface for creating an ai-agent playing cathedral (https://en.wikipedia.org/wiki/Cathedral_(board_game)).  
+Uses https://github.com/WerthersEchte/cathedral for the game state.
 
 ## How to get
 Add to use with gradle
